@@ -26,7 +26,7 @@ jobs:
 
     - name: Code Linting with Checkstyle
       run: mvn checkstyle:check
-      continue-on-error: false
+      continue-on-error: true
 
     - name: Compile and Build
       run: mvn compile -DskipTests

@@ -16,6 +16,9 @@
 - Maven 3.6 or later
   ```sh WSL
   sudo apt update
+  export M2_HOME=/opt/maven /etc/profile.d/maven.sh
+  export MAVEN_HOME=/opt/maven /etc/profile.d/maven.sh
+  export PATH=$PATH:$M2_HOME/bin /etc/profile.d/maven.sh
   ```
 - Docker and Docker Compose (to run PostgreSQL and Redis)
   ```sh WSL

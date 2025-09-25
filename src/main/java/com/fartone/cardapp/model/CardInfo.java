@@ -1,6 +1,13 @@
+/**
+ *
+ * <p>This package contains the CardInfo class.</p>
+ *
+ * @author Anna Kovalevskaja
+ * @version 1.0
+ * @since 2025
+ *
+ */
 package com.fartone.cardapp.model;
-
-// public class CardInfoEntity {
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;

@@ -73,6 +73,8 @@ To build the application from the command line, navigate to the root directory o
 
 ```sh
 mvn clean install
+# or
+mvn clean install -DskipTests
 ```
 
 This command will compile the source code, run the tests, and package the application into a JAR file in the target/ directory.
@@ -91,3 +93,7 @@ You can interact with the REST API using tools like curl or Postman.
 
 Users: /api/users
 Cards: /api/users/{userId}/cards
+
+```sh
+curl -X GET http://localhost:8080/api/users
+```

@@ -3,7 +3,7 @@ package com.fartone.cardapp;
 
 import com.fartone.cardapp.model.CardInfo;
 import com.fartone.cardapp.model.User;
-import com.fartone.cardapp.repository.*;
+import com.fartone.cardapp.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

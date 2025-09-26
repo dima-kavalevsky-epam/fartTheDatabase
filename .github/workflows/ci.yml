@@ -77,5 +77,30 @@ jobs:
         name: springboot-SecondApp
         path: target/*.jar
         retention-days: 5
-    # - name: Build Docker image
-    #   uses:
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      run: |
+        docker build -t card-service:latest .
+
+    - name: Save Docker image to tar file
+      run: |
+        docker save card-service:latest -o card-service-image.tar
+        gzip card-service-image.tar
+
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: card-service-image.tar.gz
+        retention-days: 30
+
+    - name: Test loading the image
+      run: |
+        gunzip card-service-image.tar.gz
+        docker load -i card-service-image.tar
+        docker images

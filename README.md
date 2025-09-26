@@ -102,33 +102,6 @@ You can interact with the REST API using tools like curl or Postman.
 - Users: /api/users
 - Cards: /api/users/{userId}/cards
 
-## API Endpoints Summary
-
-### User Endpoints:
-- `GET /api/users` - Get all users
-- `GET /api/users/{id}` - Get user by ID
-- `POST /api/users` - Create new user
-- `PUT /api/users/{id}` - Update user
-- `DELETE /api/users/{id}` - Delete user
-- `GET /api/users/email/{email}` - Get user by email
-- `GET /api/users/surname/{surname}` - Get users by surname
-- `GET /api/users/born-after?date={date}` - Get users born after date
-- `GET /api/users/born-between?startDate={}&endDate={}` - Get users born between dates
-- `GET /api/users/search?name={name}` - Search users by name
-
-### Card Endpoints:
-- `GET /api/cards` - Get all cards
-- `GET /api/cards/{id}` - Get card by ID
-- `POST /api/cards` - Create new card
-- `PUT /api/cards/{id}` - Update card
-- `DELETE /api/cards/{id}` - Delete card
-- `GET /api/cards/user/{userId}` - Get cards by user ID
-- `GET /api/cards/expiring-before?date={date}` - Get cards expiring before date
-- `GET /api/cards/expiring-between?startDate={}&endDate={}` - Get cards expiring between dates
-- `GET /api/cards/user-email/{email}` - Get cards by user email
-- `GET /api/cards/holder/{holder}` - Get cards by holder name
-- `PATCH /api/cards/{id}/holder?holder={name}` - Update card holder
-
 ```sh
 curl -X GET http://localhost:8080/api/users
 ```

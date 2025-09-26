@@ -10,18 +10,14 @@
  * main
  */
 
-package com.fartone.cardapp;
+package com.fartone.cardservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@EnableCaching
-public class UserCardAppApplication {
-
+public class CardServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserCardAppApplication.class, args);
+        SpringApplication.run(CardServiceApplication.class, args);
     }
-
 }

@@ -13,6 +13,7 @@
   source /etc/profile.d/java-home.sh
   echo $JAVA_HOME
   ```
+
 - Maven 3.6 or later
   ```sh WSL
   sudo apt update
@@ -28,6 +29,7 @@
   echo $M2_HOME
   mvn -version
   ```
+
 - Docker and Docker Compose (to run PostgreSQL and Redis)
   ```sh WSL
   sudo apt-get update
@@ -40,36 +42,26 @@
   sudo apt-get install docker-compose-plugin
   ```
 
-### Setup
-Start PostgreSQL and Redis using Docker:
-Create a docker-compose.yml file with the following content:
+- To install Liquibase on Ubuntu within WSL, follow these steps
+  ```sh
+  sudo apt-get update
+  wget -O- https://repo.liquibase.com/liquibase.asc | gpg --dearmor > liquibase-keyring.gpg && \
+  cat liquibase-keyring.gpg | sudo tee /usr/share/keyrings/liquibase-keyring.gpg > /dev/null && \
+  echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/liquibase-keyring.gpg] https://repo.liquibase.com stable main' | sudo tee /etc/apt/sources.list.d/liquibase.list
+  sudo apt update
+  sudo apt install liquibase
+  ```
 
-```yaml
-version: '3.8'
-services:
-  postgres:
-    image: postgres:14.5
-    container_name: postgres_db
-    environment:
-      POSTGRES_DB: usercarddb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis_cache
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-volumes:
-    postgres_data:
-    redis_data:
+### Build the Application
+To build the application from the command line, navigate to the root directory of the project (where the pom.xml is located) and run the following Maven command:
+
+```sh
+mvn clean package
+# or
+mvn clean install -DskipTests
 ```
 
+### Start PostgreSQL and Redis using Docker:
 Then run the command:
 
 ```sh WSL
@@ -78,20 +70,19 @@ sudo su
 docker-compose up -d
 ## See current status
 docker-compose ps -a
+docker-compose logs -f fartapp_card-service_1
+
 ## Stop
 docker-compose down -v
 ```
 
-### Configure application.properties:
-Ensure the database and Redis connection details in src/main/resources/application.properties match your setup. The provided file is configured to work with the docker-compose.yml setup.
+### Commands Liquibase CLI (update date of database)
 
-### Build the Application
-To build the application from the command line, navigate to the root directory of the project (where the pom.xml is located) and run the following Maven command:
+```bash
+liquibase --changeLogFile=src/main/resources/db/changelog/db.changelog-master.yaml \
+          --url=jdbc:postgresql://localhost:5432/carddb --username=postgres --password=password update
 
-```sh
-mvn clean install
-# or
-mvn clean install -DskipTests
+          src/main/resources/db/changelog/db.changelog-master.yaml
 ```
 
 This command will compile the source code, run the tests, and package the application into a JAR file in the target/ directory.
@@ -100,7 +91,7 @@ Run the Application
 Once the build is successful, you can run the application using:
 
 ```sh
-java -jar target/user-card-app-0.0.1-SNAPSHOT.jar
+java -jar target/card-service-1.0.0.jar
 ```
 
 The application will start on the default port 8080.

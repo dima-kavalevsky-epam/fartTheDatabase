@@ -16,10 +16,27 @@
 - Maven 3.6 or later
   ```sh WSL
   sudo apt update
+  cd /tmp
+  wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+  sudo tar xf apache-maven-3.6.3-bin.tar.gz -C /opt
+  sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
+  echo 'export M2_HOME=/opt/maven' /etc/profile.d/maven.sh
+  echo 'export MAVEN_HOME=/opt/maven' /etc/profile.d/maven.sh
+  echo 'export PATH=$PATH:$M2_HOME/bin' /etc/profile.d/maven.sh
+  sudo chmod +x /etc/profile.d/maven.sh
+  source /etc/profile.d/maven.sh
+  echo $M2_HOME
+  mvn -version
   ```
 - Docker and Docker Compose (to run PostgreSQL and Redis)
   ```sh WSL
   sudo apt-get update
+  sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
   sudo apt-get install docker-compose-plugin
   ```
 
@@ -91,8 +108,8 @@ The application will start on the default port 8080.
 ### API Endpoints
 You can interact with the REST API using tools like curl or Postman.
 
-Users: /api/users
-Cards: /api/users/{userId}/cards
+- Users: /api/users
+- Cards: /api/users/{userId}/cards
 
 ```sh
 curl -X GET http://localhost:8080/api/users

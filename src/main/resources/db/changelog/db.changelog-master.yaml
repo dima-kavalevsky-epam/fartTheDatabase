@@ -1,3 +1,4 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changes/001-initial-schema.yaml
+      file: src/main/resources/db/changelog/changes/003-sample-data.yaml
+

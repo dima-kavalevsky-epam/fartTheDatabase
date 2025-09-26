@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build:
+  buildSecondAttempt:
     runs-on: ubuntu-latest
 
     steps:
@@ -74,5 +74,8 @@ jobs:
     - name: Upload JAR Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: springboot-app
+        name: springboot-SecondApp
         path: target/*.jar
+        retention-days: 5
+    # - name: Build Docker image
+    #   uses:

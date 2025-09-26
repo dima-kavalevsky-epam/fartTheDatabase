@@ -70,6 +70,8 @@ sudo su
 docker-compose up -d
 ## See current status
 docker-compose ps -a
+docker-compose logs -f fartapp_card-service_1
+
 ## Stop
 docker-compose down -v
 ```
@@ -79,6 +81,8 @@ docker-compose down -v
 ```bash
 liquibase --changeLogFile=src/main/resources/db/changelog/db.changelog-master.yaml \
           --url=jdbc:postgresql://localhost:5432/carddb --username=postgres --password=password update
+
+          src/main/resources/db/changelog/db.changelog-master.yaml
 ```
 
 This command will compile the source code, run the tests, and package the application into a JAR file in the target/ directory.
@@ -98,7 +102,7 @@ You can interact with the REST API using tools like curl or Postman.
 - Users: /api/users
 - Cards: /api/users/{userId}/cards
 
-## 10. API Endpoints Summary
+## API Endpoints Summary
 
 ### User Endpoints:
 - `GET /api/users` - Get all users

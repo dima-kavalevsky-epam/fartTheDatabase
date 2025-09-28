@@ -41,7 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    @CachePut(key = "#id")
+    // Evict cache entries after successful update so subsequent reads get fresh data.
     @CacheEvict(allEntries = true)
     public Optional<User> updateUser(Long id, User userDetails) {
         return userRepository.findById(id).map(user -> {
@@ -54,13 +54,13 @@ public class UserService {
     }
 
     @Transactional
-    @CacheEvict(key = "#id", allEntries = true)
+    // Use findById + delete(entity) so unit tests that verify delete(User) will work.
+    @CacheEvict(allEntries = true)
     public boolean deleteUser(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
+        return userRepository.findById(id).map(user -> {
+            userRepository.delete(user);
             return true;
-        }
-        return false;
+        }).orElse(false);
     }
 
     public List<User> getAllUsers() {

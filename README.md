@@ -12,6 +12,7 @@
   echo 'export PATH=$PATH:$JAVA_HOME/bin' | sudo tee -a /etc/profile.d/java-home.sh
   source /etc/profile.d/java-home.sh
   echo $JAVA_HOME
+  java -version
   ```
 
 - Maven 3.6 or later
@@ -40,6 +41,7 @@
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
   sudo apt-get install docker-compose-plugin
+  docker --version
   ```
 
 - To install Liquibase on Ubuntu within WSL, follow these steps
@@ -58,6 +60,7 @@ To build the application from the command line, navigate to the root directory o
 ```sh
 mvn clean package
 # or
+mvn clean package -DskipTests
 mvn clean install -DskipTests
 ```
 
@@ -70,6 +73,7 @@ sudo su
 docker-compose up -d
 ## See current status
 docker-compose ps -a
+ docker ps -a
 docker-compose logs -f fartapp_card-service_1
 
 ## Stop
@@ -129,8 +133,7 @@ You can interact with the REST API using tools like curl or Postman.
 - `GET /api/cards/holder/{holder}` - Get cards by holder name
 - `PATCH /api/cards/{id}/holder?holder={name}` - Update card holder
 
-=======
->>>>>>> 61822be211c6a6b65e0f1de7356f7b0dbfc18f76
+
 ```sh
 curl -X GET http://localhost:8080/api/users
 ```

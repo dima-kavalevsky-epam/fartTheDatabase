@@ -1,11 +1,9 @@
-package com.fartone.cardapp;
+package com.fartone.cardservice;
 
-// public class UserServiceTest {
-// package com.example.usercardapp.service;
-
-import com.fartone.cardapp.model.User;
-import com.fartone.cardapp.repository.UserRepository;
-import com.fartone.cardapp.service.UserService;
+import com.fartone.cardservice.entity.CardInfo;
+import com.fartone.cardservice.entity.User;
+import com.fartone.cardservice.dao.UserRepository;
+import com.fartone.cardservice.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

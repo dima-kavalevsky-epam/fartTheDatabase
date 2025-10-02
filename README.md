@@ -86,7 +86,7 @@ docker-compose down -v
 liquibase --changeLogFile=src/main/resources/db/changelog/db.changelog-master.yaml \
           --url=jdbc:postgresql://localhost:5432/carddb --username=postgres --password=password update
 
-          src/main/resources/db/changelog/db.changelog-master.yaml
+
 ```
 
 This command will compile the source code, run the tests, and package the application into a JAR file in the target/ directory.
